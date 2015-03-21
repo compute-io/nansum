@@ -2,7 +2,7 @@ nansum
 ===
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependencies][dependencies-image]][dependencies-url]
 
-> Computes the sum over an array of values ignoring any values which are not numeric.
+> Computes the sum of an array ignoring non-numeric values.
 
 
 ## Installation
@@ -16,22 +16,40 @@ For use in the browser, use [browserify](https://github.com/substack/node-browse
 
 ## Usage
 
-To use the module,
-
 ``` javascript
 var nansum = require( 'compute-nansum' );
 ```
 
-#### nansum( arr )
+#### nansum( arr[, accessor] )
 
-Computes the sum while ignoring non-numeric values.
+Computes the sum of an `array` ignoring non-numeric values. For primitive `arrays`,
 
 ``` javascript
 var data = [ 1, NaN, 2, NaN, 1 ];
 
 var total = nansum( data );
 // returns 4
-``` 
+```
+
+For object `arrays`, provide an accessor `function` for accessing `array` values
+
+``` javascript
+var data = [
+    {'x':1},
+    {'x':NaN},
+    {'x':2},
+    {'x':NaN},
+    {'x':1},
+];
+
+function getValue( d ) {
+    return d.x;
+}
+
+var s = nansum( data, getValue );
+// returns 4
+```
+
 
 
 ## Examples
@@ -40,7 +58,6 @@ var total = nansum( data );
 var nansum = require( 'compute-nansum' );
 
 var data = new Array( 1000 );
-
 for ( var i = 0; i < data.length; i++ ) {
 	if ( i%5 === 0 ) {
 		data[ i ] = NaN;
@@ -48,6 +65,8 @@ for ( var i = 0; i < data.length; i++ ) {
 		data[ i ] = Math.random() * 100;
 	}
 }
+
+console.log( nansum( data ) );
 ```
 
 To run the example code from the top-level application directory,
@@ -74,7 +93,7 @@ console.log( nansum( d1 ) === nansum( d2 ) );
 
 ### Unit
 
-Unit tests use the [Mocha](http://visionmedia.github.io/mocha) test framework with [Chai](http://chaijs.com) assertions. To run the tests, execute the following command in the top-level application directory:
+Unit tests use the [Mocha](http://mochajs.org) test framework with [Chai](http://chaijs.com) assertions. To run the tests, execute the following command in the top-level application directory:
 
 ``` bash
 $ make test
@@ -98,15 +117,15 @@ $ make view-cov
 ```
 
 
+---
 ## License
 
-[MIT license](http://opensource.org/licenses/MIT). 
+[MIT license](http://opensource.org/licenses/MIT).
 
 
----
 ## Copyright
 
-Copyright &copy; 2014. Athan Reines.
+Copyright &copy; 2014-2015. Athan Reines.
 
 
 [npm-image]: http://img.shields.io/npm/v/compute-nansum.svg

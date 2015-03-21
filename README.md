@@ -1,4 +1,4 @@
-nansum
+Nansum
 ===
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependencies][dependencies-image]][dependencies-url]
 
@@ -16,23 +16,40 @@ For use in the browser, use [browserify](https://github.com/substack/node-browse
 
 ## Usage
 
-To use the module,
 
 ``` javascript
 var nansum = require( 'compute-nansum' );
 ```
 
-#### nansum( arr )
+#### nansum( arr[, accessor] )
 
-Computes the sum while ignoring non-numeric values.
+Computes the sum of an array while ignoring non-numeric values. For numeric `arrays`,
 
 ``` javascript
 var data = [ 1, NaN, 2, NaN, 1 ];
 
 var total = nansum( data );
 // returns 4
-``` 
+```
 
+For non-numeric `arrays`, provide an accessor `function` for accessing numeric `array` values
+
+``` javascript
+var data = [
+    {'x':1},
+    {'x':NaN},
+    {'x':2},
+    {'x':NaN},
+    {'x':1},
+];
+
+function getValue( d ) {
+    return d.x;
+}
+
+var s = snanum( data, getValue );
+// returns 4
+```
 
 ## Examples
 
@@ -74,7 +91,7 @@ console.log( nansum( d1 ) === nansum( d2 ) );
 
 ### Unit
 
-Unit tests use the [Mocha](http://visionmedia.github.io/mocha) test framework with [Chai](http://chaijs.com) assertions. To run the tests, execute the following command in the top-level application directory:
+Unit tests use the [Mocha](http://mochajs.org) test framework with [Chai](http://chaijs.com) assertions. To run the tests, execute the following command in the top-level application directory:
 
 ``` bash
 $ make test
@@ -98,15 +115,15 @@ $ make view-cov
 ```
 
 
+---
 ## License
 
-[MIT license](http://opensource.org/licenses/MIT). 
+[MIT license](http://opensource.org/licenses/MIT).
 
 
----
 ## Copyright
 
-Copyright &copy; 2014. Athan Reines.
+Copyright &copy; 2014-2015. Athan Reines.
 
 
 [npm-image]: http://img.shields.io/npm/v/compute-nansum.svg

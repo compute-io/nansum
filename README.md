@@ -27,7 +27,7 @@ Computes the sum of an `array` ignoring non-numeric values. For primitive `array
 ``` javascript
 var data = [ 1, NaN, 2, NaN, 1 ];
 
-var total = nansum( data );
+var s = nansum( data );
 // returns 4
 ```
 

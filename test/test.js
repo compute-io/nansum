@@ -26,15 +26,15 @@ describe( 'compute-nansum', function tests() {
 
 	it( 'should throw an error if provided a non-array', function test() {
 		var values = [
-				'5',
-				5,
-				true,
-				undefined,
-				null,
-				NaN,
-				function(){},
-				{}
-			];
+			'5',
+			5,
+			true,
+			undefined,
+			null,
+			NaN,
+			function(){},
+			{}
+		];
 
 		for ( var i = 0; i < values.length; i++ ) {
 			expect( badValue( values[i] ) ).to.throw( TypeError );
@@ -46,7 +46,7 @@ describe( 'compute-nansum', function tests() {
 		}
 	});
 
-	it( 'should compute the sum ignoring any non-numeric values', function test() {
+	it( 'should compute the sum ignoring non-numeric values', function test() {
 		var data, expected;
 
 		data = [ 2, NaN, 4, 5, NaN, 3, true, null, undefined, 8, [], {}, function(){}, 2 ];
@@ -113,6 +113,25 @@ describe( 'compute-nansum', function tests() {
 		function getValue( d ) {
 			return d.x;
 		}
+
+		assert.strictEqual( actual, expected );
+	});
+
+	it( 'should permit `Number` objects', function test() {
+		var data, expected, actual;
+
+		data = [
+			2,
+			4,
+			NaN,
+			new Number( 7 ),
+			null,
+			new Number( 3 ),
+			2
+		];
+
+		expected = 18;
+		actual = nansum( data );
 
 		assert.strictEqual( actual, expected );
 	});

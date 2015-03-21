@@ -1,8 +1,8 @@
-Nansum
+nansum
 ===
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependencies][dependencies-image]][dependencies-url]
 
-> Computes the sum over an array of values ignoring any values which are not numeric.
+> Computes the sum of an array ignoring non-numeric values.
 
 
 ## Installation
@@ -16,14 +16,13 @@ For use in the browser, use [browserify](https://github.com/substack/node-browse
 
 ## Usage
 
-
 ``` javascript
 var nansum = require( 'compute-nansum' );
 ```
 
 #### nansum( arr[, accessor] )
 
-Computes the sum of an array while ignoring non-numeric values. For numeric `arrays`,
+Computes the sum of an `array` ignoring non-numeric values. For primitive `arrays`,
 
 ``` javascript
 var data = [ 1, NaN, 2, NaN, 1 ];
@@ -32,7 +31,7 @@ var total = nansum( data );
 // returns 4
 ```
 
-For non-numeric `arrays`, provide an accessor `function` for accessing numeric `array` values
+For object `arrays`, provide an accessor `function` for accessing `array` values
 
 ``` javascript
 var data = [
@@ -47,9 +46,11 @@ function getValue( d ) {
     return d.x;
 }
 
-var s = snanum( data, getValue );
+var s = nansum( data, getValue );
 // returns 4
 ```
+
+
 
 ## Examples
 
@@ -57,7 +58,6 @@ var s = snanum( data, getValue );
 var nansum = require( 'compute-nansum' );
 
 var data = new Array( 1000 );
-
 for ( var i = 0; i < data.length; i++ ) {
 	if ( i%5 === 0 ) {
 		data[ i ] = NaN;
@@ -65,6 +65,8 @@ for ( var i = 0; i < data.length; i++ ) {
 		data[ i ] = Math.random() * 100;
 	}
 }
+
+console.log( nansum( data ) );
 ```
 
 To run the example code from the top-level application directory,

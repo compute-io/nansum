@@ -1,7 +1,7 @@
 {
   "name": "compute-nansum",
   "version": "1.0.0",
-  "description": "Computes the sum over an array of values ignoring any values which are not numeric.",
+  "description": "Computes the sum of an array ignoring non-numeric values.",
   "author": {
     "name": "Athan Reines",
     "email": "kgryte@gmail.com"
@@ -32,15 +32,19 @@
     "computation",
     "statistics",
     "stats",
+    "mathematics",
+    "math",
+    "arithmetic",
     "sum",
-    "nan"
+    "nan",
+    "array"
   ],
   "bugs": {
     "url": "https://github.com/compute-io/nansum/issues"
   },
   "dependencies": {
     "validate.io-array": "^1.0.3",
-    "validate.io-number-primitive": "^1.0.0"
+    "validate.io-number": "^1.0.3"
   },
   "devDependencies": {
     "chai": "2.x.x",
@@ -48,7 +52,7 @@
     "istanbul": "^0.3.0",
     "jshint": "^2.6.3",
     "jshint-stylish": "^1.0.1",
-    "mocha": "2 q.x.x"
+    "mocha": "2.x.x"
   },
   "licenses": [
     {
